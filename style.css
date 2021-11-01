@@ -40,6 +40,10 @@ li {
     display: inline-block;
 }
 
+li:nth-child(4) {
+    grid-column: 2;
+}
+
 li:hover {
     background-color: #353c42;
 }
@@ -53,12 +57,9 @@ canvas {
 
 @media only screen and (min-width: 800px) {
     ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        position: absolute;
         left: 20px;
         top: unset;
+        display: grid;
     }
 
     li {
@@ -70,5 +71,6 @@ canvas {
         z-index: 99999;
         position: unset;
         bottom: 5%;
+        margin-left: 20%;
     }
 }

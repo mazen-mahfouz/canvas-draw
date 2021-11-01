@@ -4,7 +4,6 @@ let pI = Math.PI / 180;
 
 var ctx = canvas.getContext('2d');
 
-
 function resize() {
     if (window.innerWidth <= 720) {
         canvas.height = window.innerHeight / 2.5;
@@ -14,21 +13,21 @@ function resize() {
         canvas.width = window.innerWidth / 1.5;
     }
 
-    for (let i = 0; i < canvas.width; i = i + 20) {
-        ctx.lineWidth = 1;
-        ctx.moveTo(i, 0)
-        ctx.lineTo(i, canvas.height)
-        ctx.moveTo(0, i)
-        ctx.lineTo(canvas.width, i)
-        ctx.stroke();
-    }
+    // for (let i = 0; i < canvas.width; i = i + 20) {
+    //     ctx.lineWidth = 1;
+    //     ctx.moveTo(i, 0)
+    //     ctx.lineTo(i, canvas.height)
+    //     ctx.moveTo(0, i)
+    //     ctx.lineTo(canvas.width, i)
+    //     ctx.stroke();
+    // }
 
     ctx.translate(canvas.width / 2, canvas.height / 2);
 
-    ctx.beginPath()
-    ctx.arc(0, 0, 5, 0, 360 * pI, false)
-    ctx.fillStyle = 'red';
-    ctx.fill()
+    // ctx.beginPath()
+    // ctx.arc(0, 0, 5, 0, 360 * pI, false)
+    // ctx.fillStyle = 'red';
+    // ctx.fill()
 }
 window.addEventListener("resize", resize);
 resize();
@@ -308,8 +307,70 @@ function change_fun(x) {
             ctx.arc(-i + res / 30, -res / 15, res / 15, 0, 360 * pI, false)
         }
         ctx.fill()
+    } else if (x == 11) {
+        ctx.restore()
+        ctx.save()
+        canvas.style.backgroundColor = 'rgb(26 26 26)';
+        let res = canvas.height / 2;
+        for (let i = 0; i <= 100; i++) {
+            ctx.rotate(181 * pI)
+            ctx.fillStyle = "hsl(" + Math.random() * 360 + ", 40%, 50%)";
+            ctx.fillRect(0, 0, res / 1.5, res / 1.5)
+        }
+    } else if (x == 12) {
+        ctx.restore()
+        ctx.save()
+        canvas.style.backgroundColor = 'rgb(26 26 26)';
+        let res = canvas.height / 2;
+        ctx.beginPath();
+        ctx.moveTo(canvas.width / 2, 0);
+        ctx.lineTo(-canvas.width / 4, 0);
+        ctx.stroke();
+
+        ctx.font = canvas.width / 10 + 'px arial';
+        ctx.beginPath();
+        ctx.fillStyle = 'black';
+        ctx.fillText('The Dark Side', -canvas.width / 4, -1)
+        ctx.scale(1, -1)
+
+        ctx.beginPath();
+        ctx.fillStyle = 'green';
+        ctx.fillText('The Dark Side', -canvas.width / 4, -1)
+
+        for (let i = 0; i <= 10; i++) {
+            let x = Math.floor(Math.random() * (canvas.width / 2 - -canvas.width / 4 + 1) + -canvas.width / 4);
+            let y = Math.floor(Math.random() * res);
+            let size = Math.floor(Math.random() * (canvas.width / 20 - 10 + 1) + 5);
+            let color = ["#34495e", "#e74c3c", '#2ecc71', '#9b59b6', '#f1c40f', '#1abc9c'];
+            ctx.fillStyle = color[Math.floor(Math.random() * color.length)];
+            ctx.beginPath()
+            ctx.arc(x, y, size, 0, 360 * pI, false);
+            ctx.scale(1, -1)
+            ctx.arc(x, y, size, 0, 360 * pI, false);
+            ctx.globalAlpha = 0.8;
+            ctx.fill();
+        }
+    } else if (x == 13) {
+        ctx.restore()
+        ctx.save()
+        ctx.translate(-canvas.width / 2, -canvas.height / 2);
+        canvas.style.backgroundColor = 'white';
+        let w = canvas.width;
+        let h = canvas.height;
+        let ran = Math.floor(Math.random() * 10);
+        for (let i = 0; i < w; i = i + 5) {
+            for (let j = 0; j < h; j = j + 5) {
+                let r = Math.floor(Math.random() * 255);
+                let g = Math.floor(Math.random() * 255);
+                let b = Math.floor(Math.random() * 255);
+                ctx.fillStyle = 'rgb(' + r + ',' + g + ',' + b + ')';
+                ctx.beginPath()
+                ctx.fillRect(i, j, 10, 10)
+            }
+        }
     }
 }
+
 
 //////////////////////////////////////////////////////////////////////////////////
 canvas.onmousedown = function (e) {
